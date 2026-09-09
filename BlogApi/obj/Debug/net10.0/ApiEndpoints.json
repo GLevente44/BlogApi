@@ -29,7 +29,7 @@
     "Parameters": [
       {
         "Name": "blogger",
-        "Type": "BlogApi.Models.Blogger",
+        "Type": "BlogApi.Models.DTOs.AddBloggerDto",
         "IsRequired": true
       }
     ],

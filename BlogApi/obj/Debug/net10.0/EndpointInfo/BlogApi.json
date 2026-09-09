@@ -58,17 +58,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/AddBloggerDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/AddBloggerDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/AddBloggerDto"
               }
             }
           },
@@ -152,6 +152,37 @@
   },
   "components": {
     "schemas": {
+      "AddBloggerDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "age": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "password": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "Blogger": {
         "type": "object",
         "properties": {
@@ -164,10 +195,16 @@
             "format": "int32"
           },
           "name": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "email": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "age": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
@@ -178,7 +215,10 @@
             "format": "int32"
           },
           "password": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "regTime": {
             "type": "string",
