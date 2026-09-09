@@ -24,7 +24,7 @@ namespace BlogApi
                 app.MapOpenApi();
                 app.MapScalarApiReference();
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
