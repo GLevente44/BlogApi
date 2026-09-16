@@ -15,7 +15,7 @@ namespace BlogApi.Controllers
         [HttpGet]
         public List<BlogPost> GetAllBlogPost()
         {
-            List<BlogPost> bloggers = new List<BlogPost>();
+            List<BlogPost> blogposts = new List<BlogPost>();
 
             var connector = new MySqlConnection(ConnectionString);
             connector.Open();
@@ -26,7 +26,7 @@ namespace BlogApi.Controllers
 
             while (dataReader.Read())
             {
-                var blogger = new BlogPost
+                var blogpost = new BlogPost
                 {
                     Id = dataReader.GetInt32(0),
                     Title = dataReader.GetString(1),
@@ -36,41 +36,43 @@ namespace BlogApi.Controllers
                     blogId = dataReader.GetInt32(5),
 
                 };
-                bloggers.Add(blogger);
+                blogposts.Add(blogpost);
             }
 
 
             connector.Close();
-            return bloggers;
+            return blogposts;
         }
     
 
 
     [HttpPost]
-        public object AddNewBlogPost(AddBlogPostDto blogger)
+        public object AddNewBlogPost(AddBlogPostDto blogpost)
         {
             var connector = new MySqlConnection(ConnectionString);
             connector.Open();
 
-            var blg = new BlogPost
+            var blgp = new BlogPost
             {
-                Title = blogger.Title,
-                Content = blogger.Content,
+                Title = blogpost.Title,
+                Content = blogpost.Content,
                 postTime = DateTime.Now,
-                updateTime = DateTime.Now
+                updateTime = DateTime.Now,
+                blogId = blogpost.Id
             };
 
-            var sql = $"INSERT INTO `blogpost`(`Title`, `Content`, `postTime`, `updateTime`) VALUES (@title,@content,@posttime,@updatetime)";
+            var sql = $"INSERT INTO `blogpost`(`Title`, `Content`, `postTime`, `updateTime`, `blogId`) VALUES (@title,@content,@posttime,@updatetime,@blogid)";
 
             var cmd = new MySqlCommand(sql, connector);
-            cmd.Parameters.AddWithValue("@title", blg.Title);
-            cmd.Parameters.AddWithValue("@content", blg.Content);
-            cmd.Parameters.AddWithValue("@posttime", blg.postTime);
-            cmd.Parameters.AddWithValue("@updatetime", blg.updateTime);
+            cmd.Parameters.AddWithValue("@title", blgp.Title);
+            cmd.Parameters.AddWithValue("@content", blgp.Content);
+            cmd.Parameters.AddWithValue("@posttime", blgp.postTime);
+            cmd.Parameters.AddWithValue("@updatetime", blgp.updateTime);
+            cmd.Parameters.AddWithValue("blogid", blgp.blogId);
 
             cmd.ExecuteNonQuery();
             connector.Close();
-            return blg;
+            return blgp;
         }
 
         [HttpPut]

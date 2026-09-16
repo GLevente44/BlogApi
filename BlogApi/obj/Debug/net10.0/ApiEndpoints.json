@@ -122,7 +122,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "blogger",
+        "Name": "blogpost",
         "Type": "BlogApi.Models.DTOs.AddBlogPostDto",
         "IsRequired": true
       }
