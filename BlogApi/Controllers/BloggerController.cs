@@ -70,14 +70,10 @@ namespace BlogApi.Controllers
 
             cmd.ExecuteNonQuery();
             connector.Close();
-            return null;
+            return blg;
         }
 
         [HttpPut]
-        public object UpdateBlogger(int id, Blogger blogger)
-        {
-            return null;
-        }
         public object UpdateBlogger([FromQuery] int id, [FromBody] UpdateBloggerDto updateBloggerDto)
         {
             var connector = new MySqlConnection(ConnectionString);

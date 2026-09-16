@@ -13,6 +13,44 @@
     }
   ],
   "paths": {
+    "/api/BlogFeladatok": {
+      "get": {
+        "tags": [
+          "BlogFeladatok"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Blogger"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Blogger"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Blogger"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Blogger": {
       "get": {
         "tags": [
@@ -102,17 +140,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/UpdateBloggerDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/UpdateBloggerDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Blogger"
+                "$ref": "#/components/schemas/UpdateBloggerDto"
               }
             }
           },
@@ -537,6 +575,9 @@
     }
   },
   "tags": [
+    {
+      "name": "BlogFeladatok"
+    },
     {
       "name": "Blogger"
     },
