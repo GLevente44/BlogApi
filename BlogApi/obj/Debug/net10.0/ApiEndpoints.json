@@ -112,5 +112,58 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "BlogApi.Controllers.BlogPostController",
+    "Method": "AddNewBlogPost",
+    "RelativePath": "api/BlogPost",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "blogger",
+        "Type": "BlogApi.Models.DTOs.AddBlogPostDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApi.Controllers.BlogPostController",
+    "Method": "UpdateBlogPost",
+    "RelativePath": "api/BlogPost",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "updateBlogPostDto",
+        "Type": "BlogApi.Models.DTOs.UpdateBlogPostDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApi.Controllers.BlogPostController",
+    "Method": "DeleteBlogPost",
+    "RelativePath": "api/BlogPost",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -1,6 +1,6 @@
-﻿namespace BlogApi.Models
+﻿namespace BlogApi.Models.DTOs
 {
-    public class BlogPost
+    public class UpdateBlogPostDto
     {
         public int Id { get; set; }
         public string? Title { get; set; }
