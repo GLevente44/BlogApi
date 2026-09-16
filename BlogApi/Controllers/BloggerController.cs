@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySqlConnector;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 namespace BlogApi.Controllers
@@ -123,6 +124,58 @@ namespace BlogApi.Controllers
 
 
             return new {message = "Sikeres törlés"};
+        }
+
+        [HttpGet("byId")]
+        public object GetBloggerById(int id)
+        {
+            var connector = new MySqlConnection(ConnectionString);
+            connector.Open();
+
+            var sql = "SELECT `Name`, `Email` FROM `blogger` WHERE `Id` = @id;";
+            var cmd = new MySqlCommand(sql, connector);
+            cmd.Parameters.AddWithValue("@id", id);
+            var datareader = cmd.ExecuteReader();
+            datareader.Read();
+
+            var blogger = new 
+            {
+                Name = datareader.GetString(0),
+                Email = datareader.GetString(1)
+            };
+
+            connector.Close();
+            return blogger;
+        }
+
+
+
+        [HttpGet("byOwnPosts")]
+        public List<object> GetBloggerWithPost(int id)
+        {
+            List<object> ownPost = new List<object>();
+            var connector = new MySqlConnection(ConnectionString);
+            connector.Open();
+
+            var sql = "SELECT blogger.Name,blogpost.Title, blogpost.Content FROM `blogger` INNER JOIN blogpost ON blogger.id = blogpost.blogId WHERE blogger.`id` = @id";
+            var cmd = new MySqlCommand(sql, connector);
+            cmd.Parameters.AddWithValue("@id", id);
+            var datareader = cmd.ExecuteReader();
+            while (datareader.Read())
+            {
+                var bloggerOwnPosts = new
+                {
+                    Name = datareader.GetString(0),
+                    Title = datareader.GetString(1),
+                    Content = datareader.GetString(2)
+                };
+
+                ownPost.Add(bloggerOwnPosts);
+
+            }
+            
+            connector.Close();
+            return ownPost;
         }
     }
 }
